@@ -21,9 +21,9 @@ class DashboardController extends Controller
         $jumlahGaleri = Galeri::count();
 
 
-        // Mengambil 5 berita terbaru
+        // Mengambil 4 berita terbaru
         $beritaTerbaru = Berita::orderBy('tanggal', 'desc')
-            ->take(5)
+            ->take(4)
             ->get();
 
 

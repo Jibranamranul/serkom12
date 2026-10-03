@@ -245,7 +245,7 @@
             <p class="page-description">Informasi lengkap mengenai SMK YPC Tasikmalaya</p>
         </div>
 
-        <!-- HERO BANNER DENGAN FOTO -->
+        <!-- BANNER DENGAN FOTO -->
         <div class="hero-banner">
             <!-- Ganti src di bawah ini dengan nama file foto sekolah Anda di folder assets/images/ -->
             <img src="{{ asset('assets/images/gedung.jpg') }}" alt="Gedung SMK YPC Tasikmalaya" class="hero-img">

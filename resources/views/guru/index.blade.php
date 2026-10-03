@@ -135,26 +135,58 @@
             margin-bottom: 38px;
         }
 
-        /* SEARCH */
+
+        /* ACTION & FILTER BAR */
+        .action-bar {
+            background: white;
+            padding: 20px 24px;
+            border-radius: 16px;
+            border: 1px solid #eef2f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+        }
+
 
         .search-box {
-            background: white;
-            border-radius: 15px;
-            padding: 14px 20px;
-            margin-bottom: 25px;
+            position: relative;
+            width: 280px;
         }
 
-        .search-input {
-            width: 275px;
-            padding: 11px 15px;
-            border: 1px solid #dce6e3;
-            border-radius: 9px;
-            outline: none;
-            font-size: 13px;
+
+
+        .search-box input:focus {
+            border-color: #059669;
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
         }
 
-        .search-input:focus {
-            border-color: #00a77b;
+        .search-box i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+        }
+
+        .btn-tambah {
+            background: #059669;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.2s;
+            cursor: pointer;
+            text-decoration: none;
         }
 
         /* GURU */
@@ -351,10 +383,17 @@
 
         <!-- SEARCH -->
 
-        <div class="search-box">
-
-            <input type="text" id="searchGuru" class="search-input" placeholder="🔍  Cari guru...">
-
+        <div class="action-bar">
+            <div class="filter-group">
+                <div class="search-box">
+                    <i class="bi bi-search">
+                        <input type="text" placeholder="Cari nama atau NIP...">
+                    </i>
+                </div>
+            </div>
+            <a href="#" class="btn-tambah">
+                <i class="bi bi-person-plus-fill"></i> Tambah Siswa
+            </a>
         </div>
 
 
@@ -374,13 +413,14 @@
 
                         @else
 
-                            <div style="
-                                                                        height:100%;
-                                                                        display:flex;
-                                                                        align-items:center;
-                                                                        justify-content:center;
-                                                                        color:#637b8a;
-                                                                    ">
+                            <div
+                                style="
+                                                                                                                                                                                height:100%;
+                                                                                                                                                                                display:flex;
+                                                                                                                                                                                align-items:center;
+                                                                                                                                                                                justify-content:center;
+                                                                                                                                                                                color:#637b8a;
+                                                                                                                                                                            ">
                                 Tidak ada foto
                             </div>
 

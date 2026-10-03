@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Login - SI Sekolah</title>
+    <title>Login - SMK YPC CINTAWANA</title>
 
     <style>
         * {
@@ -97,7 +97,7 @@
     <div class="login-container">
 
         <div class="logo">
-            <h1>🎓 S</h1>
+            <h1>SMK YPC</h1>
             <p>Silakan login untuk masuk ke sistem</p>
         </div>
 

@@ -297,20 +297,8 @@
                     <input type="text" placeholder="Cari nama atau NISN...">
                 </div>
 
-                <select class="select-filter">
-                    <option value="">Semua Jurusan</option>
-                    <option value="RPL">PPLG / RPL</option>
-                    <option value="TKJ">TJKT / TKJ</option>
-                    <option value="TKR">TKR Otomotif</option>
-                    <option value="AKL">Akuntansi (AKL)</option>
-                </select>
 
-                <select class="select-filter">
-                    <option value="">Semua Kelas</option>
-                    <option value="10">Kelas X</option>
-                    <option value="11">Kelas XI</option>
-                    <option value="12">Kelas XII</option>
-                </select>
+
             </div>
 
             <a href="#" class="btn-tambah">

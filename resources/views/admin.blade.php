@@ -26,7 +26,7 @@
             color: #17231f;
         }
 
-        /* ================= SIDEBAR (TIDAK DIUBAH) ================= */
+        /* SIDEBAR */
         .sidebar {
             width: 260px;
             height: 100vh;
@@ -160,7 +160,7 @@
             color: #8ca69e;
         }
 
-        /* ================= MAIN CONTENT ================= */
+        /* MAIN CONTENT */
         .main {
             margin-left: 260px;
             min-height: 100vh;
@@ -724,7 +724,7 @@
                 <!-- Welcome Banner -->
                 <div class="col-xl-5 col-lg-6">
                     <div class="welcome">
-                        <h2>Selamat Datang 👋</h2>
+                        <h2>Selamat Datang</h2>
                         <p>Kelola informasi sekolah dengan mudah, cepat, dan terorganisir.</p>
                         <a href="{{ url('/profil') }}" class="welcome-button">
                             Lihat Profil Sekolah <i class="bi bi-arrow-right"></i>
@@ -771,81 +771,166 @@
             </div>
             <!-- BERITA & GALERI SECTION -->
             <div class="row g-4">
+
                 <!-- Section Berita -->
                 <div class="col-lg-7">
+
                     <div class="card-school">
+
                         <div class="card-header-title">
-                            <div class="card-title">Berita Kegiatan Terbaru</div>
-                            <a href="{{ url('/berita') }}" class="stat-link">Lihat Semua</a>
+
+                            <div class="card-title">
+                                Berita Kegiatan Terbaru
+                            </div>
+
+                            <a href="{{ url('/berita') }}" class="stat-link">
+                                Lihat Semua
+                            </a>
+
                         </div>
 
+
                         @if(isset($beritaTerbaru) && $beritaTerbaru->count() > 0)
+
                             @foreach($beritaTerbaru as $berita)
+
                                 <div class="news-item">
+
+                                    {{-- GAMBAR BERITA --}}
                                     @if(!empty($berita->gambar))
-                                        {{-- Yus path public/images/ --}}
-                                        <img src="{{ asset('images/' . $berita->gambar) }}" class="news-img"
+
+                                        <img src="{{ asset('assets/images/' . $berita->gambar) }}" class="news-img"
                                             alt="{{ $berita->judul }}">
+
                                     @else
+
                                         <div class="news-icon-placeholder">
+
                                             <i class="bi bi-newspaper"></i>
+
                                         </div>
+
                                     @endif
 
+
+                                    {{-- DATA BERITA --}}
                                     <div>
-                                        <div class="news-title">{{ $berita->judul }}</div>
-                                        <div class="news-date">
-                                            <i class="bi bi-calendar3"></i> {{ $berita->tanggal }}
+
+                                        <div class="news-title">
+                                            {{ $berita->judul }}
                                         </div>
+
+                                        <div class="news-date">
+
+                                            <i class="bi bi-calendar3"></i>
+
+                                            {{ \Carbon\Carbon::parse($berita->tanggal)->format('d M Y') }}
+
+                                        </div>
+
                                     </div>
+
                                 </div>
+
                             @endforeach
+
                         @else
+
                             <div class="empty-state">
+
                                 <i class="bi bi-newspaper"></i>
-                                <p class="mb-0">Belum ada berita kegiatan terbaru.</p>
+
+                                <p class="mb-0">
+                                    Belum ada berita kegiatan terbaru.
+                                </p>
+
                             </div>
+
                         @endif
+
                     </div>
+
                 </div>
+
 
                 <!-- Section Galeri -->
                 <div class="col-lg-5">
+
                     <div class="card-school">
+
                         <div class="card-header-title">
-                            <div class="card-title">Galeri Terbaru</div>
-                            <a href="{{ url('/galeri') }}" class="stat-link">Lihat Semua</a>
+
+                            <div class="card-title">
+                                Galeri Terbaru
+                            </div>
+
+                            <a href="{{ url('/galeri') }}" class="stat-link">
+                                Lihat Semua
+                            </a>
+
                         </div>
 
+
                         <div class="row g-3">
+
                             @if(isset($galeriTerbaru) && $galeriTerbaru->count() > 0)
+
                                 @foreach($galeriTerbaru as $galeri)
+
                                     <div class="col-6">
+
                                         <div class="gallery-item">
+
                                             @if(!empty($galeri->gambar))
-                                                {{-- Yus path public/images/ --}}
-                                                <img src="{{ asset('images/' . $galeri->gambar) }}" class="gallery-img"
+
+                                                <img src="{{ asset('assets/images/' . $galeri->gambar) }}" class="gallery-img"
                                                     alt="{{ $galeri->judul }}">
+
                                             @else
+
                                                 <div class="gallery-placeholder">
+
                                                     <i class="bi bi-image"></i>
+
                                                 </div>
+
                                             @endif
-                                            <div class="gallery-caption">{{ $galeri->judul }}</div>
+
+
+                                            <div class="gallery-caption">
+                                                {{ $galeri->judul }}
+                                            </div>
+
                                         </div>
+
                                     </div>
+
                                 @endforeach
+
                             @else
+
                                 <div class="col-12">
+
                                     <div class="empty-state">
+
                                         <i class="bi bi-images"></i>
-                                        <p class="mb-0">Belum ada koleksi galeri.</p>
+
+                                        <p class="mb-0">
+                                            Belum ada koleksi galeri.
+                                        </p>
+
                                     </div>
+
                                 </div>
+
                             @endif
+
                         </div>
+
                     </div>
+
                 </div>
+
             </div>
         </main>
 

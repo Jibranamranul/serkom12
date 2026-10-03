@@ -198,11 +198,9 @@
 
             color: #8da69d;
         }
+    
 
-
-        /* =========================
-           KONTEN
-        ========================= */
+/* KONTEN */
 
         .content {
             margin-left: 240px;
@@ -251,17 +249,15 @@
             font-size: 17px;
         }
     </style>
- 
- <!-- #region -->
+
+    <!-- #region -->
 </head>
 
 
 <body>
 
 
-    <!-- =================================
-         SIDEBAR
-    ================================== -->
+  <!-- SIDEBAR -->
 
     <aside class="sidebar">
 
@@ -270,7 +266,7 @@
 
             <i class="bi bi-mortarboard-fill"></i>
 
-            <span>SMK YPC   </span>
+            <span>SMK YPC </span>
 
         </div>
 

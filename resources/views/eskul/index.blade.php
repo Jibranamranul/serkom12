@@ -246,13 +246,12 @@
 </head>
 
 <body>
-    //Sidebar//
+ <!-- SIDEBAR -->
     @include('layout.sidebar')
-
-    //Kontent Utama//
+<!-- KONTENUTAMA -->
     <main class="content">
 
-        //Header Page//
+        <!-- HEADER -->
         <div class="page-header">
             <div>
                 <h1 class="page-title">Ekstrakurikuler</h1>
