@@ -294,22 +294,24 @@
             <div class="filter-group">
                 <div class="search-box">
                     <i class="bi bi-search"></i>
-                    <input type="text" placeholder="Cari nama atau NISN...">
+                    <input type="text" id="searchSiswa" placeholder="Cari nama atau NISN..." autocomplete="off">
                 </div>
 
 
 
             </div>
-
-            <a href="#" class="btn-tambah">
-                <i class="bi bi-person-plus-fill"></i> Tambah Siswa
-            </a>
+            @if (auth()->user()->role === 'operator')
+                <a href="{{ route('siswa.create') }}" class="btn-tambah">
+                    <i class="bi bi-person-plus-fill"></i>
+                    Tambah Siswa
+                </a>
+            @endif
         </div>
 
         <!-- TABEL DATA SISWA -->
         <div class="card-table">
             <div class="table-responsive">
-                <table class="table-custom">
+                <table class="table-custom" id="tableSiswa">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -333,14 +335,19 @@
                                 </td>
 
                                 {{-- SISWA --}}
+                                {{-- SISWA --}}
                                 <td>
                                     <div class="siswa-info">
 
-                                        <img src="{{ asset('assets/images/avatar.png') }}" alt="Avatar"
-                                            class="siswa-avatar">
+                                        @if ($item->foto && file_exists(public_path('assets/images/' . $item->foto)))
+                                            <img src="{{ asset('assets/images/' . $item->foto) }}" alt="{{ $item->nama }}"
+                                                class="siswa-avatar">
+                                        @else
+                                            <img src="{{ asset('assets/images/avatar.png') }}" alt="Avatar"
+                                                class="siswa-avatar">
+                                        @endif
 
                                         <div>
-
                                             <div class="siswa-nama">
                                                 {{ $item->nama }}
                                             </div>
@@ -348,12 +355,10 @@
                                             <div class="siswa-nisn">
                                                 NISN: {{ $item->nisn }}
                                             </div>
-
                                         </div>
 
                                     </div>
                                 </td>
-
                                 {{-- KELAS --}}
                                 <td>
                                     <strong>
@@ -383,17 +388,39 @@
                                 {{-- AKSI --}}
                                 <td class="text-center">
 
-                                    <a href="#" class="btn-action" title="Detail">
-                                        <i class="bi bi-eye"></i>
-                                    </a>
+                                    @if (auth()->user()->role === 'operator')
 
-                                    <a href="#" class="btn-action" title="Edit">
-                                        <i class="bi bi-pencil-square"></i>
-                                    </a>
+                                        {{-- EDIT --}}
+                                        <a href="{{ route('siswa.edit', $item->id) }}" class="btn-action" title="Edit">
 
-                                    <a href="#" class="btn-action delete" title="Hapus">
-                                        <i class="bi bi-trash"></i>
-                                    </a>
+                                            <i class="bi bi-pencil-square"></i>
+
+                                        </a>
+
+                                        {{-- HAPUS --}}
+                                        <form action="{{ route('siswa.destroy', $item->id) }}" method="POST"
+                                            style="display:inline;"
+                                            onsubmit="return confirm('Yakin ingin menghapus siswa ini?');">
+
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <button type="submit" class="btn-action delete" title="Hapus">
+
+                                                <i class="bi bi-trash"></i>
+
+                                            </button>
+
+                                        </form>
+
+                                    @else
+
+                                        {{-- PENGGUNA HANYA BISA MELIHAT --}}
+                                        <span style="color:#94a3b8;">
+                                            <i class="bi bi-eye"></i>
+                                        </span>
+
+                                    @endif
 
                                 </td>
 
@@ -408,7 +435,30 @@
 
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const searchSiswa = document.getElementById('searchSiswa');
+        const tableSiswa = document.getElementById('tableSiswa');
+
+        searchSiswa.addEventListener('keyup', function () {
+
+            const keyword = this.value.toLowerCase();
+
+            const rows = tableSiswa.querySelectorAll('tbody tr');
+z
+            rows.forEach(function (row) {
+
+                const text = row.textContent.toLowerCase();
+
+                if (text.includes(keyword)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+
+            });
+
+        });
+    </script>
 </body>
 
 </html>

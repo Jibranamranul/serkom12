@@ -112,11 +112,12 @@
             @csrf
 
             <div class="form-group">
-                <label>Email</label>
+                <label>Username</label>
 
-                <input type="email" name="email" value="{{ old('email') }}" placeholder="Masukkan email" required>
+                <input type="text" name="username" value="{{ old('username') }}" placeholder="Masukkan username"
+                    required>
             </div>
-
+            
             <div class="form-group">
                 <label>Password</label>
 

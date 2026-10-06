@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Edit Siswa - SMK YPC</title>
+    <title>Tambah Siswa - SMK YPC</title>
 
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -30,6 +30,10 @@
             box-shadow: 0 4px 20px rgba(0,0,0,.05);
         }
 
+        h1 {
+            margin-top: 0;
+        }
+
         .form-group {
             margin-bottom: 18px;
         }
@@ -47,14 +51,6 @@
             border: 1px solid #ddd;
             border-radius: 8px;
             box-sizing: border-box;
-        }
-
-        .foto-lama {
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 50%;
-            margin-bottom: 10px;
         }
 
         .btn {
@@ -75,6 +71,11 @@
             background: #64748b;
             color: white;
         }
+
+        .error {
+            color: red;
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 
@@ -86,59 +87,50 @@
 
         <div class="card">
 
-            <h1>Edit Siswa</h1>
+            <h1>Tambah Siswa</h1>
 
-            <form action="{{ route('siswa.update', $siswa->id) }}"
-                method="POST"
+            @if ($errors->any())
+                <div class="error">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form action="{{ route('siswa.store') }}" method="POST"
                 enctype="multipart/form-data">
 
                 @csrf
-                @method('PUT')
 
                 <div class="form-group">
                     <label>Nama Siswa</label>
-                    <input type="text"
-                        name="nama"
-                        value="{{ $siswa->nama }}"
-                        required>
+                    <input type="text" name="nama" value="{{ old('nama') }}" required>
                 </div>
 
                 <div class="form-group">
                     <label>NISN</label>
-                    <input type="text"
-                        name="nisn"
-                        value="{{ $siswa->nisn }}">
+                    <input type="text" name="nisn" value="{{ old('nisn') }}">
                 </div>
 
                 <div class="form-group">
                     <label>Kelas</label>
-                    <input type="text"
-                        name="kelas"
-                        value="{{ $siswa->kelas }}"
-                        required>
+                    <input type="text" name="kelas" value="{{ old('kelas') }}" required>
                 </div>
 
                 <div class="form-group">
                     <label>Jurusan</label>
-                    <input type="text"
-                        name="jurusan"
-                        value="{{ $siswa->jurusan }}"
-                        required>
+                    <input type="text" name="jurusan" value="{{ old('jurusan') }}" required>
                 </div>
 
                 <div class="form-group">
                     <label>Jenis Kelamin</label>
 
                     <select name="jenis_kelamin" required>
-                        <option value="Laki-laki"
-                            {{ $siswa->jenis_kelamin == 'Laki-laki' ? 'selected' : '' }}>
-                            Laki-laki
-                        </option>
-
-                        <option value="Perempuan"
-                            {{ $siswa->jenis_kelamin == 'Perempuan' ? 'selected' : '' }}>
-                            Perempuan
-                        </option>
+                        <option value="">-- Pilih --</option>
+                        <option value="Laki-laki">Laki-laki</option>
+                        <option value="Perempuan">Perempuan</option>
                     </select>
                 </div>
 
@@ -146,47 +138,22 @@
                     <label>Status</label>
 
                     <select name="status" required>
-                        <option value="Aktif"
-                            {{ $siswa->status == 'Aktif' ? 'selected' : '' }}>
-                            Aktif
-                        </option>
-
-                        <option value="Tidak Aktif"
-                            {{ $siswa->status == 'Tidak Aktif' ? 'selected' : '' }}>
-                            Tidak Aktif
-                        </option>
+                        <option value="Aktif">Aktif</option>
+                        <option value="Tidak Aktif">Tidak Aktif</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-
-                    <label>Foto Saat Ini</label>
-
-                    @if ($siswa->foto)
-                        <br>
-
-                        <img src="{{ asset('assets/images/' . $siswa->foto) }}"
-                            class="foto-lama"
-                            alt="{{ $siswa->nama }}">
-                    @endif
-
-                </div>
-
-                <div class="form-group">
-                    <label>Ganti Foto</label>
-
-                    <input type="file"
-                        name="foto"
-                        accept=".jpg,.jpeg,.png,.webp">
+                    <label>Foto</label>
+                    <input type="file" name="foto" accept=".jpg,.jpeg,.png,.webp">
                 </div>
 
                 <button type="submit" class="btn btn-simpan">
                     <i class="bi bi-save"></i>
-                    Simpan Perubahan
+                    Simpan
                 </button>
 
-                <a href="{{ route('siswa.index') }}"
-                    class="btn btn-kembali">
+                <a href="{{ route('siswa.index') }}" class="btn btn-kembali">
                     Kembali
                 </a>
 

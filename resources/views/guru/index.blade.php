@@ -2,14 +2,18 @@
 <html lang="id">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Guru - SI Sekolah</title>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -22,36 +26,26 @@
             color: #102a43;
         }
 
-        /* Sidebar */
+        /* ================= SIDEBAR ================= */
 
         .sidebar {
             position: fixed;
             left: 0;
             top: 0;
-
             width: 260px;
             height: 100vh;
-
             background: #032c1f;
             color: white;
-
             padding: 22px 18px;
-
             overflow-y: auto;
         }
-
-
-        /* Logo */
 
         .brand {
             display: flex;
             align-items: center;
-
             gap: 10px;
-
             font-size: 21px;
             font-weight: bold;
-
             margin-bottom: 35px;
         }
 
@@ -60,38 +54,24 @@
             font-size: 27px;
         }
 
-        /* Judul Menu */
         .menu-title {
             color: #6f8b82;
-
             font-size: 10px;
             font-weight: bold;
-
             margin: 25px 10px 10px;
-
             text-transform: uppercase;
-
             letter-spacing: 1px;
         }
-
-        /* Menu */
 
         .menu-item {
             display: flex;
             align-items: center;
-
             gap: 13px;
-
             padding: 12px 13px;
-
             border-radius: 10px;
-
             color: #a9bbb5;
-
             text-decoration: none;
-
             transition: 0.2s;
-
             margin-bottom: 5px;
         }
 
@@ -114,12 +94,11 @@
             font-size: 17px;
         }
 
-        /* Content */
+        /* ================= CONTENT ================= */
+
         .main-content {
             margin-left: 260px;
-
             padding: 40px;
-
             min-height: 100vh;
         }
 
@@ -135,8 +114,18 @@
             margin-bottom: 38px;
         }
 
+        /* ================= ALERT ================= */
 
-        /* ACTION & FILTER BAR */
+        .alert-success {
+            background: #dcfce7;
+            color: #166534;
+            padding: 13px 16px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* ================= ACTION BAR ================= */
+
         .action-bar {
             background: white;
             padding: 20px 24px;
@@ -151,17 +140,21 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
         }
 
-
         .search-box {
             position: relative;
             width: 280px;
         }
 
-
+        .search-box input {
+            width: 100%;
+            padding: 11px 14px 11px 40px;
+            border: 1px solid #d9e2df;
+            border-radius: 9px;
+            outline: none;
+        }
 
         .search-box input:focus {
             border-color: #059669;
-            background: #ffffff;
             box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
         }
 
@@ -184,12 +177,15 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            transition: 0.2s;
             cursor: pointer;
             text-decoration: none;
         }
 
-        /* GURU */
+        .btn-tambah:hover {
+            background: #047857;
+        }
+
+        /* ================= GURU ================= */
 
         .guru-container {
             display: grid;
@@ -257,6 +253,43 @@
             font-size: 14px;
         }
 
+        /* ================= ACTION GURU ================= */
+
+        .guru-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #edf1f0;
+        }
+
+        .btn-edit {
+            background: #059669;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .btn-edit:hover {
+            background: #047857;
+        }
+
+        .btn-delete {
+            background: #dc2626;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: none;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .btn-delete:hover {
+            background: #b91c1c;
+        }
+
         .empty-data {
             background: white;
             padding: 30px;
@@ -264,31 +297,40 @@
             color: #637b8a;
         }
 
+        /* ================= RESPONSIVE ================= */
+
         @media (max-width: 1100px) {
+
             .guru-container {
                 grid-template-columns: repeat(2, 1fr);
             }
+
         }
 
         @media (max-width: 700px) {
+
             .sidebar {
                 width: 200px;
             }
 
             .main-content {
                 margin-left: 200px;
+                padding: 25px;
             }
 
             .guru-container {
                 grid-template-columns: 1fr;
             }
+
         }
+
     </style>
+
 </head>
 
 <body>
 
-    <!-- SIDEBAR -->
+    <!-- ================= SIDEBAR ================= -->
 
     <aside class="sidebar">
 
@@ -348,27 +390,35 @@
             Sistem
         </div>
 
-        <a href="#" class="menu-item">
-            <i class="bi bi-person-gear"></i>
-            <span>Pengguna</span>
-        </a>
+        @if(auth()->user()->role === 'operator')
+
+            <a href="{{ route('pengguna.index') }}" class="menu-item">
+                <i class="bi bi-person-gear"></i>
+                <span>Pengguna</span>
+            </a>
+
+        @endif
 
         <form action="{{ route('logout') }}" method="POST">
+
             @csrf
 
-            <button type="submit" class="menu-item"
+            <button type="submit"
+                class="menu-item"
                 style="width:100%; background:none; border:none; cursor:pointer; text-align:left;">
 
                 <i class="bi bi-box-arrow-right"></i>
+
                 <span>Logout</span>
 
             </button>
+
         </form>
 
     </aside>
 
 
-    <!-- CONTENT -->
+    <!-- ================= CONTENT ================= -->
 
     <main class="main-content">
 
@@ -381,19 +431,50 @@
         </p>
 
 
-        <!-- SEARCH -->
+        {{-- Pesan sukses --}}
+
+        @if(session('success'))
+
+            <div class="alert-success">
+                <i class="bi bi-check-circle"></i>
+                {{ session('success') }}
+            </div>
+
+        @endif
+
+
+        <!-- SEARCH & BUTTON -->
 
         <div class="action-bar">
-            <div class="filter-group">
-                <div class="search-box">
-                    <i class="bi bi-search">
-                        <input type="text" placeholder="Cari nama atau NIP...">
-                    </i>
-                </div>
+
+            <div class="search-box">
+
+                <i class="bi bi-search"></i>
+
+                <input
+                    type="text"
+                    id="searchGuru"
+                    placeholder="Cari nama atau NIP..."
+                >
+
             </div>
-            <a href="#" class="btn-tambah">
-                <i class="bi bi-person-plus-fill"></i> Tambah Siswa
-            </a>
+
+
+            {{-- Tombol tambah hanya operator --}}
+
+            @if(auth()->user()->role === 'operator')
+
+                <a href="{{ route('guru.create') }}"
+                    class="btn-tambah">
+
+                    <i class="bi bi-person-plus-fill"></i>
+
+                    Tambah Guru
+
+                </a>
+
+            @endif
+
         </div>
 
 
@@ -401,27 +482,36 @@
 
         <div class="guru-container">
 
-            @forelse ($gurus as $guru)
+            @forelse($guru as $item)
 
                 <div class="guru-card">
 
+                    <!-- FOTO -->
+
                     <div class="guru-img-wrapper">
 
-                        @if ($guru->foto)
+                        @if($item->foto)
 
-                            <img src="{{ asset('assets/images/' . $guru->foto) }}" alt="{{ $guru->nama }}" class="guru-img">
+                            <img
+                                src="{{ asset('assets/images/' . $item->foto) }}"
+                                alt="{{ $item->nama }}"
+                                class="guru-img"
+                            >
 
                         @else
 
-                            <div
-                                style="
-                                                                                                                                                                                height:100%;
-                                                                                                                                                                                display:flex;
-                                                                                                                                                                                align-items:center;
-                                                                                                                                                                                justify-content:center;
-                                                                                                                                                                                color:#637b8a;
-                                                                                                                                                                            ">
-                                Tidak ada foto
+                            <div style="
+                                height:100%;
+                                display:flex;
+                                align-items:center;
+                                justify-content:center;
+                                color:#637b8a;
+                            ">
+
+                                <i class="bi bi-person"
+                                    style="font-size:60px;">
+                                </i>
+
                             </div>
 
                         @endif
@@ -429,58 +519,114 @@
                     </div>
 
 
+                    <!-- DATA -->
+
                     <div class="guru-body">
 
                         <h3 class="guru-title">
-                            {{ $guru->nama }}
+                            {{ $item->nama }}
                         </h3>
 
                         <div class="guru-jabatan">
-                            {{ $guru->jabatan }}
+                            {{ $item->jabatan }}
                         </div>
 
 
                         <div class="guru-info">
 
                             <div class="guru-info-item">
+
                                 <i class="bi bi-person-vcard"></i>
 
                                 <span>
                                     NIP:
                                     <strong>
-                                        {{ $guru->nip }}
+                                        {{ $item->nip ?: '-' }}
                                     </strong>
                                 </span>
+
                             </div>
 
 
                             <div class="guru-info-item">
+
                                 <i class="bi bi-envelope"></i>
 
                                 <span>
-                                    {{ $guru->email }}
+                                    {{ $item->email ?: '-' }}
                                 </span>
+
                             </div>
 
 
                             <div class="guru-info-item">
+
                                 <i class="bi bi-telephone"></i>
 
                                 <span>
-                                    {{ $guru->no_hp }}
+                                    {{ $item->no_hp ?: '-' }}
                                 </span>
+
                             </div>
 
 
                             <div class="guru-info-item">
+
                                 <i class="bi bi-geo-alt"></i>
 
                                 <span>
-                                    {{ $guru->alamat }}
+                                    {{ $item->alamat ?: '-' }}
                                 </span>
+
                             </div>
 
                         </div>
+
+
+                        {{-- Edit & Hapus hanya operator --}}
+
+                        @if(auth()->user()->role === 'operator')
+
+                            <div class="guru-actions">
+
+                                <a
+                                    href="{{ route('guru.edit', $item->id) }}"
+                                    class="btn-edit"
+                                >
+
+                                    <i class="bi bi-pencil-square"></i>
+
+                                    Edit
+
+                                </a>
+
+
+                                <form
+                                    action="{{ route('guru.destroy', $item->id) }}"
+                                    method="POST"
+                                    onsubmit="return confirm('Yakin ingin menghapus data guru ini?')"
+                                >
+
+                                    @csrf
+
+                                    @method('DELETE')
+
+                                    <button
+                                        type="submit"
+                                        class="btn-delete"
+                                    >
+
+                                        <i class="bi bi-trash"></i>
+
+                                        Hapus
+
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                        @endif
 
                     </div>
 
@@ -489,7 +635,11 @@
             @empty
 
                 <div class="empty-data">
+
+                    <i class="bi bi-info-circle"></i>
+
                     Belum ada data guru.
+
                 </div>
 
             @endforelse
@@ -498,6 +648,8 @@
 
     </main>
 
+
+    <!-- ================= SEARCH ================= -->
 
     <script>
 
@@ -514,9 +666,13 @@
                 const text = card.innerText.toLowerCase();
 
                 if (text.includes(keyword)) {
+
                     card.style.display = '';
+
                 } else {
+
                     card.style.display = 'none';
+
                 }
 
             });

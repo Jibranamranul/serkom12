@@ -21,16 +21,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::table('siswa', function (Blueprint $table) {
-            $table->dropColumn([
-                'nama',
-                'nisn',
-                'kelas',
-                'jurusan',
-                'jenis_kelamin',
-                'status',
-                'foto',
-            ]);
-        });
+  
     }
 };
