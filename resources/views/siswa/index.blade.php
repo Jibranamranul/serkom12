@@ -444,7 +444,7 @@
             const keyword = this.value.toLowerCase();
 
             const rows = tableSiswa.querySelectorAll('tbody tr');
-z
+
             rows.forEach(function (row) {
 
                 const text = row.textContent.toLowerCase();
